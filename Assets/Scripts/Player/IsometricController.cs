@@ -22,9 +22,6 @@ public class IsometricController : MonoBehaviour
     [SerializeField] private float _sensorRadius = 0.2f;
     [SerializeField] private LayerMask _groundLayer;
     private bool _isGrounded;
-    private int damage;
-    public bool isDead;
-    public 
 
     //Animaciones
     Animator _anim;
@@ -58,7 +55,7 @@ public class IsometricController : MonoBehaviour
 
         Movement();
         Gravity();
-        TakeDamage();
+        //TakeDamage(1);
 
         //Disparo
         RateOfFire();
@@ -92,7 +89,7 @@ public class IsometricController : MonoBehaviour
         
      }
 
-    void TakeDamage()
+    void TakeDamage(int damage)
     {
         _hp -= damage;
 
@@ -132,7 +129,7 @@ public class IsometricController : MonoBehaviour
 
         if(_isGrounded && _playerGravity.y < 0)
         {
-            _playerGravity.y = 0;
+            _playerGravity.y = -2;
         }
 
          _playerGravity.y += _gravity * Time.deltaTime;

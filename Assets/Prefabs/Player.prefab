@@ -954,7 +954,7 @@ Animator:
   m_GameObject: {fileID: 4067352572257471581}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: b6f98117d17d74a4c8bb383ee15a2054, type: 2}
+  m_Controller: {fileID: 9100000, guid: 44b8823a33976d24e8f585fc818bf35e, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -1490,7 +1490,7 @@ MonoBehaviour:
   _sensorRadius: 0.2
   _groundLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 8
   isDead: 0
   _anim: {fileID: 0}
   _hp: 10
