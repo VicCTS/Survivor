@@ -59,7 +59,7 @@ public class IsometricController : MonoBehaviour
 
         //Disparo
         RateOfFire();
-        if(Input.GetKeyDown(KeyCode.K) && _canShoot)
+        if(_canShoot)
         {
             _anim.SetBool("IsShooting", true);
             Shooting();
@@ -89,7 +89,7 @@ public class IsometricController : MonoBehaviour
         
      }
 
-    void TakeDamage(int damage)
+    public  void TakeDamage(int damage)
     {
         _hp -= damage;
 
@@ -101,18 +101,33 @@ public class IsometricController : MonoBehaviour
         }
     }
 
+    public void TakeHealth(int _health)
+    {
+        _hp += _health;
+    }
+
     
 
     void Movement()
     {
         Vector3 direction = new Vector3(_horizontal, 0, _vertical);
 
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+
+        if(Physics.Raycast(ray, out hit, Mathf.Infinity))
+        {
+            Vector3 directionRaycast = hit.point - transform.position;
+            directionRaycast.y = 0;
+            transform.forward = directionRaycast;
+        }
+
         if(direction != Vector3.zero)
         {
-            float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
+            /*float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
             float smoothAngle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
 
-            transform.rotation = Quaternion.Euler(0, smoothAngle, 0);
+            transform.rotation = Quaternion.Euler(0, smoothAngle, 0);*/
 
             _controller.Move(direction.normalized * _playerSpeed * Time.deltaTime);
             _anim.SetBool("IsRunning", true);

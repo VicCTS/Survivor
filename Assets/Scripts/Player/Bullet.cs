@@ -6,6 +6,7 @@ public class Bullet : MonoBehaviour
 {
     Rigidbody _rBody;
     public float _bulletSpeed = 100;
+    public int shootDamage = 2;
 
     void Start()
     {
@@ -21,5 +22,13 @@ public class Bullet : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
+
+        Enemy enemy = collider.transform.GetComponent<Enemy>();
+
+        if (enemy != null)
+        {
+            enemy.TakeDamage(shootDamage);
+        }
+
     }
 }
