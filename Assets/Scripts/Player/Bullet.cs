@@ -6,13 +6,13 @@ public class Bullet : MonoBehaviour
 {
     Rigidbody _rBody;
     public float _bulletSpeed = 100;
-    public int shootDamage = 2;
+    public int shootDamage;
 
     void Start()
     {
         _rBody = GetComponent<Rigidbody>();
-
         _rBody.AddForce(transform.right * _bulletSpeed, ForceMode.Impulse);
+        shootDamage = Global.playerDamage;
 
     }
 

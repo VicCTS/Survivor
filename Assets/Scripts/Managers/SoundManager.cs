@@ -2,34 +2,46 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
 public class SoundManager : MonoBehaviour
 {
     public static SoundManager instance {get; private set;}
 
-    AudioSource source;
-    public AudioClip gameOver;
-    public AudioClip shoot;
-    public AudioClip jump;
+    [SerializeField]AudioSource bgmSource;
+    [SerializeField]AudioSource sfxSource;
+    public AudioClip buttonSound;
+    public AudioClip playSound;
+    public AudioClip bgmSound;
+
+    
     // Start is called before the first frame update
     void Awake()
     {
-        source = GetComponent<AudioSource>();
         if(instance != null && instance != this)
         {
             Destroy(this.gameObject);
         }
         else
         {
-            instance = this;
+            instance =this;
         }
     }
 
     public void PlaySound(AudioClip clip)
     {
-        source.PlayOneShot(clip);
+        sfxSource.PlayOneShot(clip);
+    }
+
+    public void PlayBGM()
+    {
+        bgmSource.Play();
+    }
+
+    public void StopBGM()
+    {
+        bgmSource.Stop();
     }
 
     //SoundManager.instance.PlaySound(SoundManager.instance.gameOver);
     //SoundManager.instance.PlaySound(SoundManager.instance.jump);
+
 }

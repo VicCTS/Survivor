@@ -9,7 +9,7 @@ public class IsometricController : MonoBehaviour
     private float _vertical;
 
     //variables para velocidad, salto y gravedad
-    [SerializeField] private float _playerSpeed = 5;
+    [SerializeField] private float _playerSpeed;
     private float _gravity = -9.81f;
     private Vector3 _playerGravity;
 
@@ -27,16 +27,15 @@ public class IsometricController : MonoBehaviour
     Animator _anim;
 
     //Vida
-    [SerializeField] private int _hp = 10;
-
-     GameManager _gameManager;
+    [SerializeField] private int _maxHP;
+    [SerializeField] private int _hp;
 
      //Disparo
      [SerializeField] private GameObject bulletPrefab;
      [SerializeField] private Transform bulletSpawn;
     public bool _canShoot;
-    public float _rateOfFire = 1;
-    public float _rateOfFireTimer = 0;
+    public float _rateOfFire;
+    public float _rateOfFireTimer;
 
     
     // Start is called before the first frame update
@@ -44,7 +43,12 @@ public class IsometricController : MonoBehaviour
     {
         _controller = GetComponent<CharacterController>();
         _anim = GetComponentInChildren<Animator>();
-        _gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        _maxHP = Global.playerMaxHealth;
+        _hp = _maxHP;
+        _playerSpeed = Global.playerSpeed;
+        _rateOfFire = Global.fireRate;
+        _rateOfFireTimer = Global.fireRateTimer;
+        Debug.Log(Global.playerMaxHealth);
     }
 
     // Update is called once per frame
@@ -93,9 +97,9 @@ public class IsometricController : MonoBehaviour
     {
         _hp -= damage;
 
-        if(_hp <= 0 &&  _gameManager._gameOver == false)
+        if(_hp <= 0 &&  GameManager.instance._gameOver == false)
         {
-                _gameManager.GameOver();
+                GameManager.instance.GameOver();
                 _anim.SetTrigger("IsDead");
 
         }
