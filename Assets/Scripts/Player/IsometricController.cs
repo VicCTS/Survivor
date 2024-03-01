@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class IsometricController : MonoBehaviour
 {
@@ -29,6 +30,7 @@ public class IsometricController : MonoBehaviour
     //Vida
     [SerializeField] private int _maxHP;
     [SerializeField] private int _hp;
+    Slider _slider;
 
      //Disparo
      [SerializeField] private GameObject bulletPrefab;
@@ -41,10 +43,13 @@ public class IsometricController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        _slider = GameObject.Find("UI HP").GetComponentInChildren<Slider>();
         _controller = GetComponent<CharacterController>();
         _anim = GetComponentInChildren<Animator>();
         _maxHP = Global.playerMaxHealth;
         _hp = _maxHP;
+        _slider.maxValue = Global.playerMaxHealth;
+        _slider.value = _slider.maxValue;
         _playerSpeed = Global.playerSpeed;
         _rateOfFire = Global.fireRate;
         _rateOfFireTimer = Global.fireRateTimer;

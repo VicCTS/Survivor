@@ -11,7 +11,7 @@ public class TreeHealth : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        healthSlider.maxValue=treeHealth;
+        healthSlider.maxValue = treeHealth;
     }
 
     // Update is called once per frame
@@ -24,17 +24,18 @@ public class TreeHealth : MonoBehaviour
         }  
     }
 
-    void TakeDamage(int damage)
+    public void TakeDamage(int damage)
     {
-         if(treeHealth > 0) 
+        if(treeHealth > 0) 
         {
-           treeHealth -= damage; 
-           healthSlider.value -=damage;
-        }  
-        else
-        {
-            Destroy(gameObject);
+            Debug.Log("arbol a recibido " + damage + " de daño");
+            treeHealth -= damage; 
+            healthSlider.value = treeHealth;
 
-        }
+            if(treeHealth <= 0)
+            {
+                Destroy(gameObject);
+            }
+        } 
     }
 }
