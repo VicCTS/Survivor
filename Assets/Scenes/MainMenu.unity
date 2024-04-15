@@ -1012,7 +1012,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 456307459}
-  - component: {fileID: 456307458}
+  - component: {fileID: 456307460}
   m_Layer: 0
   m_Name: SoundManager
   m_TagString: Untagged
@@ -1020,23 +1020,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &456307458
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 456307457}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1023213762b22454c98cb14521f0d063, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bgmSource: {fileID: 1990554721}
-  sfxSource: {fileID: 1925369853}
-  buttonSound: {fileID: 8300000, guid: b66672b0fdd09b049b9f1eef867a8d19, type: 3}
-  playSound: {fileID: 8300000, guid: b66672b0fdd09b049b9f1eef867a8d19, type: 3}
-  bgmSound: {fileID: 8300000, guid: 9212b33c0b1bbe648ab0cb62fe9d0644, type: 3}
 --- !u!4 &456307459
 Transform:
   m_ObjectHideFlags: 0
@@ -1054,6 +1037,23 @@ Transform:
   - {fileID: 1990554722}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &456307460
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 456307457}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1023213762b22454c98cb14521f0d063, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bgmSource: {fileID: 0}
+  sfxSource: {fileID: 0}
+  buttonSound: {fileID: 0}
+  playSound: {fileID: 0}
+  bgmSound: {fileID: 0}
 --- !u!1 &470228539
 GameObject:
   m_ObjectHideFlags: 0
@@ -3002,7 +3002,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1686190274}
-  - component: {fileID: 1686190273}
   - component: {fileID: 1686190272}
   m_Layer: 0
   m_Name: MenuManager
@@ -3029,18 +3028,6 @@ MonoBehaviour:
   _initialPosition: 1600
   _finalPosition: 540
   _bookSpeed: 7
---- !u!114 &1686190273
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1686190271}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 21f693a9fe675d742aafe41fd026965b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &1686190274
 Transform:
   m_ObjectHideFlags: 0

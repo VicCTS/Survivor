@@ -59,24 +59,27 @@ public class IsometricController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        _horizontal = Input.GetAxisRaw("Horizontal");
-        _vertical = Input.GetAxisRaw("Vertical");
+        if(GameManager.instance._gameOver == false)
+        {  
+            _horizontal = Input.GetAxisRaw("Horizontal");
+            _vertical = Input.GetAxisRaw("Vertical");
+            Movement();
+            Gravity();
+            //TakeDamage(1);
 
-        Movement();
-        Gravity();
-        //TakeDamage(1);
-
-        //Disparo
-        RateOfFire();
-        if(_canShoot)
-        {
-            _anim.SetBool("IsShooting", true);
-            Shooting();
-            _rateOfFireTimer = 0;
-        }else
+            //Disparo
+            RateOfFire();
+            if(_canShoot)
+            {
+                _anim.SetBool("IsShooting", true);
+                Shooting();
+                _rateOfFireTimer = 0;
+            }
+            else
             {
                 _anim.SetBool("IsShooting", false);
-             }
+            }
+        }
     }
     
     void Shooting()
@@ -91,21 +94,23 @@ public class IsometricController : MonoBehaviour
         {
             _rateOfFireTimer += Time.deltaTime;
              _canShoot = false;
-        }else
-         {
-          _canShoot = true;
-         }
+        }
+        else
+        {
+            _canShoot = true;
+        }
         
      }
 
     public  void TakeDamage(int damage)
     {
         _hp -= damage;
+        _slider.value -= damage;
 
         if(_hp <= 0 &&  GameManager.instance._gameOver == false)
         {
-                GameManager.instance.GameOver();
-                _anim.SetTrigger("IsDead");
+            GameManager.instance.GameOver();
+            _anim.SetTrigger("IsDead");
 
         }
     }
@@ -141,7 +146,8 @@ public class IsometricController : MonoBehaviour
             _controller.Move(direction.normalized * _playerSpeed * Time.deltaTime);
             _anim.SetBool("IsRunning", true);
 
-        }else
+        }
+        else
         {
             _anim.SetBool("IsRunning", false);
         }

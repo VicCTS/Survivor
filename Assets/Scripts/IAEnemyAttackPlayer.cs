@@ -11,10 +11,12 @@ public class IAEnemyAttackPlayer : MonoBehaviour
         Attacking
     }
 
-    State currentState;
+    [SerializeField]State currentState;
 
     NavMeshAgent enemyAgent;
     Transform playerTransform;
+
+    [SerializeField]private int _health =5;
 
     [SerializeField] float attackRange = 5;
     [SerializeField] float attackAngle = 90;
@@ -29,7 +31,7 @@ public class IAEnemyAttackPlayer : MonoBehaviour
     {
         enemyAgent = GetComponent<NavMeshAgent>();
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
-        player = GameObject.Find("Player").GetComponent<IsometricController>();
+        player = playerTransform.GetComponent<IsometricController>();
     }
 
     void Start()
@@ -41,15 +43,15 @@ public class IAEnemyAttackPlayer : MonoBehaviour
     {
         if(GameManager.instance._gameOver == false)
         {
-            switch (currentState) 
-            {
-                case State.Chasing:
-                    Chase();
-                break;
-                case State.Attacking:
-                    Attack();
-                break;
-            }
+        switch (currentState) 
+        {
+            case State.Chasing:
+                Chase();
+            break;
+            case State.Attacking:
+                Attack();
+            break;
+        }
         }
 
     }
@@ -80,6 +82,7 @@ public class IAEnemyAttackPlayer : MonoBehaviour
                 attackTime = 0;
             }
         }
+
         if(canAttack == true)
         {
             player.TakeDamage(40);
@@ -99,6 +102,34 @@ public class IAEnemyAttackPlayer : MonoBehaviour
             return true;
         }
             return false;
+    }
+
+    private void Death()
+    {
+        //anim.SetBool("is dead", true);
+
+        GameManager.instance.EnemyDestroyed();
+
+        Destroy(this.gameObject);
+        /*int randomObject = Random.Range(0, 20);
+        Debug.Log(randomObject);
+
+        if(randomObject <= randomObjects.Length -1)
+        {
+            Instantiate(randomObjects[randomObject], transform.position, transform.rotation);
+        }*/        
+    }
+
+    public void TakeDamage(int damage)
+    {
+        _health -= damage;
+
+        if(_health <= 0)
+        {
+                
+            Death();
+
+        }
     }
 
     void OnDrawGizmos()

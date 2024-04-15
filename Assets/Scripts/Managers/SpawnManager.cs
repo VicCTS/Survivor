@@ -4,19 +4,29 @@ using UnityEngine;
 
 public class SpawnManager : MonoBehaviour
 {
-    [SerializeField] GameObject enemyPrefab;//prefab de enemigo
+    [SerializeField] GameObject[] enemyPrefab;//prefab de enemigo
+
+    [SerializeField] private int totalLevelEnemies;
 
     [SerializeField]private int enemyToSpawn;//enemigos totales
     private int totalEnemiesToSpawn;//enemigos por cada spawn
     [SerializeField]float waveTime = 60;//tiempo de la oleada
     [SerializeField]int waveNumber = 5;//numero de oleadas
 
+    
+
     //public Transform[] spawnPositions  = new Transform[3]{};
 
     [SerializeField] private Transform[] spawnPositions;
+
     // Start is called before the first frame update
     void Start()
     {
+        totalLevelEnemies = GameManager.instance.totalEnemies;
+        waveNumber = GameManager.instance.totalWaves;
+
+        enemyToSpawn = totalLevelEnemies / waveNumber;
+        
         totalEnemiesToSpawn = enemyToSpawn / spawnPositions.Length+1;// esto lo hacemos para repartir los enemigos dentro de todos los spawns el uno lo ponemos para que detecte todos los spawns
         StartCoroutine("SpawnEnemy");//empezamos corutina que es una funcion que se puede parar
     }
@@ -37,7 +47,6 @@ public class SpawnManager : MonoBehaviour
 
         if(waveTime <= 0)// reanudar el tiempo con oleada 
         {
-            enemyToSpawn = Random.Range(30, 60);
             totalEnemiesToSpawn = enemyToSpawn / spawnPositions.Length+1;
 
             StartCoroutine("SpawnEnemy");
@@ -52,9 +61,9 @@ public class SpawnManager : MonoBehaviour
 
         for(int i = 0; i < (int)totalEnemiesToSpawn; i++)
         {
-            Instantiate(enemyPrefab, randomSpawn.position, randomSpawn.rotation);//crea una copia de los prefabs y los pone en un spawn aleatorio
+            Instantiate(enemyPrefab[Random.Range(0, enemyPrefab.Length)], randomSpawn.position, randomSpawn.rotation);//crea una copia de los prefabs y los pone en un spawn aleatorio
             enemyToSpawn--;
-            yield return new WaitForSeconds(1);// para parar corutina y que se espere un segundo
+            yield return new WaitForSeconds(2);// para parar corutina y que se espere un segundo
         }    
 
         StartCoroutine("SpawnEnemy");    

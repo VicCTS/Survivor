@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Build.Content;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -15,6 +16,8 @@ public class TreeEnemy : MonoBehaviour
 
     NavMeshAgent _treeEnemyAgent;
 
+    [SerializeField]private int _health = 5;
+
     public int _enemyDamage = 2; 
     [SerializeField]GameObject[] _treePosition;
     int _nearestTreeIndex;
@@ -29,24 +32,11 @@ public class TreeEnemy : MonoBehaviour
     void Awake()
     {
         _treeEnemyAgent = GetComponent<NavMeshAgent>();
-       SetTrees();
-    }
-
-    void SetTrees()
-    {
-        _treePosition = GameObject.FindGameObjectsWithTag("Arbol");
-        distances = new float[_treePosition.Length];
-
-        for (int i = 0; i < _treePosition.Length; i++)
-        {
-            distances[i] = Vector3.Distance(transform.position, _treePosition[i].transform.position);
-        } 
-        _nearestTreeIndex = GetNearestTree();
-        _treeTarget = _treePosition[_nearestTreeIndex].GetComponent<TreeHealth>();
     }
 
     void Start()
     {
+        SetTrees();
         _currentState = State.Rushing;
     }
 
@@ -63,6 +53,19 @@ public class TreeEnemy : MonoBehaviour
         }
     }
 
+    void SetTrees()
+    {
+        _treePosition = GameObject.FindGameObjectsWithTag("Arbol");
+        distances = new float[_treePosition.Length];
+
+        for (int i = 0; i < _treePosition.Length; i++)
+        {
+            distances[i] = Vector3.Distance(transform.position, _treePosition[i].transform.position);
+        } 
+        _nearestTreeIndex = GetNearestTree();
+        _treeTarget = _treePosition[_nearestTreeIndex].GetComponent<TreeHealth>();
+    }
+
     bool OnRange()
     {
         if(Vector3.Distance(transform.position, _treePosition[_nearestTreeIndex].transform.position) <= _attackRange) 
@@ -74,11 +77,17 @@ public class TreeEnemy : MonoBehaviour
 
     void Rush()
     {
-        Debug.Log(_nearestTreeIndex);
+        if (_treeTarget == null)
+        {
+            SetTrees();
+            GetNearestTree();
+        }
+
         _treeEnemyAgent.destination = _treePosition[_nearestTreeIndex].transform.position;
 
         if(OnRange() == true)
         {
+            _treeEnemyAgent.isStopped = true;
             _currentState = State.Attacking;
         }
     }
@@ -93,11 +102,13 @@ public class TreeEnemy : MonoBehaviour
             _treeTarget.TakeDamage(_enemyDamage);
         }
 
-        /*if (_treeTarget == null)
+        if (_treeTarget == null)
         {
+            SetTrees();
             GetNearestTree();
+            _treeEnemyAgent.isStopped = false;
             _currentState = State.Rushing;
-        }*/
+        }
     }
 
     int GetNearestTree()
@@ -114,5 +125,33 @@ public class TreeEnemy : MonoBehaviour
             }
         }
         return _index;
+    }
+
+    private void Death()
+    {
+        //anim.SetBool("is dead", true);
+        
+        GameManager.instance.EnemyDestroyed();
+
+        Destroy(this.gameObject);
+        /*int randomObject = Random.Range(0, 20);
+        Debug.Log(randomObject);
+
+        if(randomObject <= randomObjects.Length -1)
+        {
+            Instantiate(randomObjects[randomObject], transform.position, transform.rotation);
+        }*/        
+    }
+
+    public void TakeDamage(int damage)
+    {
+        _health -= damage;
+
+        if(_health <= 0)
+        {
+                
+            Death();
+
+        }
     }
 }

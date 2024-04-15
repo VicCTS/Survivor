@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 7480841944705510272}
   - component: {fileID: 6183958609416774835}
   - component: {fileID: 1657661205417774990}
+  - component: {fileID: 206080619151002083}
   m_Layer: 0
   m_Name: tree_enemy
   m_TagString: Untagged
@@ -104,14 +105,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc510ce6af316ec4894a357310dd888a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _health: 1
   _enemyDamage: 10
-  _treePosition:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  _treePosition: []
   _treeTarget: {fileID: 0}
   distances: []
-  _attackRange: 5
+  _attackRange: 10
   waitTime: 2
   timer: 0
 --- !u!195 &1657661205417774990
@@ -124,7 +123,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.3637129
-  m_Speed: 3.5
+  m_Speed: 7
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -136,6 +135,29 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!136 &206080619151002083
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 499351006774304840}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.93, z: 0}
 --- !u!1 &2125547576818515934
 GameObject:
   m_ObjectHideFlags: 0

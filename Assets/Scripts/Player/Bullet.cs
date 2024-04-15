@@ -18,16 +18,25 @@ public class Bullet : MonoBehaviour
 
     void OnTriggerEnter(Collider collider)
     {
-         if(collider.gameObject.tag != "Player"  && collider.gameObject.tag != "Bullet" && collider.gameObject.layer != 7)
+        /*if(collider.gameObject.tag != "Player"  && collider.gameObject.tag != "Bullet" && collider.gameObject.layer != 7)
         {
+            Destroy(this.gameObject);
+        }*/
+
+        TreeEnemy treeEnemy = collider.transform.GetComponent<TreeEnemy>();
+
+        if(treeEnemy != null)
+        {
+            treeEnemy.TakeDamage(shootDamage);
             Destroy(this.gameObject);
         }
 
-        Enemy enemy = collider.transform.GetComponent<Enemy>();
+        IAEnemyAttackPlayer enemy = collider.transform.GetComponent<IAEnemyAttackPlayer>();
 
-        if (enemy != null)
+        if(enemy != null)
         {
             enemy.TakeDamage(shootDamage);
+            Destroy(this.gameObject);
         }
 
     }

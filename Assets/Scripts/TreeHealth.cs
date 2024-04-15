@@ -12,6 +12,7 @@ public class TreeHealth : MonoBehaviour
     void Start()
     {
         healthSlider.maxValue = treeHealth;
+        healthSlider.value = treeHealth;
     }
 
     // Update is called once per frame
@@ -34,6 +35,7 @@ public class TreeHealth : MonoBehaviour
 
             if(treeHealth <= 0)
             {
+                GameManager.instance.TreeDestroyed();
                 Destroy(gameObject);
             }
         } 

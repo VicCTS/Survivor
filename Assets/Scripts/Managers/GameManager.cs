@@ -4,17 +4,57 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-public bool _gameOver = false;
-public static GameManager instance {get; private set;}
+    public static GameManager instance {get; private set;}
+
+    public bool _gameOver = false;
+
+    public GameObject[] trees;
+    public int totalTrees;
+
+    public int totalEnemies;
+    public int totalWaves;
 
     void Awake()
     {
         instance = this;
     }
 
+    void Start()
+    {
+        trees = GameObject.FindGameObjectsWithTag("Arbol");
+        totalTrees = trees.Length;
+    }
+
+    public void TreeDestroyed()
+    {
+        totalTrees--;
+
+        if(totalTrees <= 0)
+        {
+            GameOver();
+        }
+    }
+
+    public void EnemyDestroyed()
+    {
+        totalEnemies--;
+
+        if(totalEnemies <= 0)
+        {
+            Win();
+        }
+    }
+
     public void GameOver()
     {
-        _gameOver=true;
+        MenuPause.instance.ShowGameOverCanvas();
+        _gameOver = true;
+    }
+
+    public void Win()
+    {
+        MenuPause.instance.ShowWinCanvas();
+        _gameOver = true;
     }
 
 }

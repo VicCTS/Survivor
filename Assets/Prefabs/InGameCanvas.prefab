@@ -688,7 +688,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1257970956476174138}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
@@ -1218,6 +1218,8 @@ MonoBehaviour:
   botonPausa: {fileID: 5239753451674260637}
   menuPausa: {fileID: 8817695636720815189}
   options: {fileID: 3318435447763224141}
+  gameOverCanvas: {fileID: 1257970956476174138}
+  winCanvas: {fileID: 442546471958251330}
 --- !u!1 &2818084051260182859
 GameObject:
   m_ObjectHideFlags: 0
@@ -2229,10 +2231,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3049211685147950793}
-        m_TargetAssemblyTypeName: CambioEscena, Assembly-CSharp
-        m_MethodName: CambiarEscena
-        m_Mode: 5
+      - m_Target: {fileID: 1292149745825654729}
+        m_TargetAssemblyTypeName: MenuPause, Assembly-CSharp
+        m_MethodName: RestartLevel
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine

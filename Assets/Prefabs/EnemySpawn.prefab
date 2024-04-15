@@ -258,8 +258,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f26301e14b07e2458477ae3ebf866f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cubePrefab: {fileID: 3990969731263901739, guid: 58d2b236615dbe64389bc584dac501a8, type: 3}
-  cubeToSpawn: 5
+  enemyPrefab:
+  - {fileID: 499351006774304840, guid: ba1729ebfcee1f744b551d942795c3ec, type: 3}
+  - {fileID: 7889510501162095688, guid: f53c55e7b307af847a50045f797c7c54, type: 3}
+  enemyToSpawn: 0
+  waveTime: 60
+  waveNumber: 5
   spawnPositions:
   - {fileID: 2674238777619673381}
   - {fileID: 7424668536442927355}
