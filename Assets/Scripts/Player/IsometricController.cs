@@ -15,6 +15,7 @@ public class IsometricController : MonoBehaviour
     private Vector3 _playerGravity;
 
     //variables para rotacion
+    [SerializeField] private float rotationSpeed = 10;
     private float turnSmoothVelocity;
     [SerializeField] float turnSmoothTime = 0.1f;
 
@@ -39,6 +40,11 @@ public class IsometricController : MonoBehaviour
     public float _rateOfFire;
     public float _rateOfFireTimer;
 
+    public bl_Joystick joystickLeft;
+    public bl_Joystick joystickRight;
+
+    Transform _camera;
+
     
     // Start is called before the first frame update
     void Start()
@@ -52,8 +58,10 @@ public class IsometricController : MonoBehaviour
         _slider.value = _slider.maxValue;
         _playerSpeed = Global.playerSpeed;
         _rateOfFire = Global.fireRate;
-        _rateOfFireTimer = Global.fireRateTimer;
+        //_rateOfFireTimer = Global.fireRateTimer;
         Debug.Log(Global.playerMaxHealth);
+
+        _camera = Camera.main.transform;
     }
 
     // Update is called once per frame
@@ -61,8 +69,12 @@ public class IsometricController : MonoBehaviour
     {
         if(GameManager.instance._gameOver == false)
         {  
-            _horizontal = Input.GetAxisRaw("Horizontal");
-            _vertical = Input.GetAxisRaw("Vertical");
+            /*_horizontal = Input.GetAxisRaw("Horizontal");
+            _vertical = Input.GetAxisRaw("Vertical");*/
+
+            _horizontal = joystickLeft.Horizontal;
+            _vertical = joystickLeft.Vertical;
+
             Movement();
             Gravity();
             //TakeDamage(1);
@@ -93,14 +105,14 @@ public class IsometricController : MonoBehaviour
         if(_rateOfFireTimer <= _rateOfFire)
         {
             _rateOfFireTimer += Time.deltaTime;
-             _canShoot = false;
+            _canShoot = false;
         }
         else
         {
             _canShoot = true;
         }
         
-     }
+    }
 
     public  void TakeDamage(int damage)
     {
@@ -124,9 +136,7 @@ public class IsometricController : MonoBehaviour
 
     void Movement()
     {
-        Vector3 direction = new Vector3(_horizontal, 0, _vertical);
-
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        /*Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
 
         if(Physics.Raycast(ray, out hit, Mathf.Infinity))
@@ -134,6 +144,17 @@ public class IsometricController : MonoBehaviour
             Vector3 directionRaycast = hit.point - transform.position;
             directionRaycast.y = 0;
             transform.forward = directionRaycast;
+        }*/
+
+        Vector3 direction = new Vector3(_horizontal, 0, _vertical);
+
+        //transform.Rotate(Vector3.up * joystickRight.Horizontal * rotationSpeed * Time.deltaTime);
+
+        Vector3 cameraAim = new Vector3(joystickRight.Horizontal, 0, joystickRight.Vertical);
+
+        if(cameraAim != Vector3.zero)
+        {
+            transform.forward = cameraAim;
         }
 
         if(direction != Vector3.zero)
@@ -143,7 +164,11 @@ public class IsometricController : MonoBehaviour
 
             transform.rotation = Quaternion.Euler(0, smoothAngle, 0);*/
 
+            /*float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + _camera.eulerAngles.y;  
+            Vector3 moveDirection = Quaternion.Euler(0, targetAngle, 0) * Vector3.forward;*/
+
             _controller.Move(direction.normalized * _playerSpeed * Time.deltaTime);
+            //_controller.Move(moveDirection.normalized * _playerSpeed * Time.deltaTime);
             _anim.SetBool("IsRunning", true);
 
         }

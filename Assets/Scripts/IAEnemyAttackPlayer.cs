@@ -20,7 +20,7 @@ public class IAEnemyAttackPlayer : MonoBehaviour
 
     [SerializeField] float attackRange = 5;
     [SerializeField] float attackAngle = 90;
-    [SerializeField] float damage = 1;
+    [SerializeField] int attackDamage = 1;
     float attackTime;
     float attackWait = 1;
     bool canAttack = true;
@@ -43,15 +43,15 @@ public class IAEnemyAttackPlayer : MonoBehaviour
     {
         if(GameManager.instance._gameOver == false)
         {
-        switch (currentState) 
-        {
-            case State.Chasing:
-                Chase();
-            break;
-            case State.Attacking:
-                Attack();
-            break;
-        }
+            switch (currentState) 
+            {
+                case State.Chasing:
+                    Chase();
+                break;
+                case State.Attacking:
+                    Attack();
+                break;
+            }
         }
 
     }
@@ -85,7 +85,7 @@ public class IAEnemyAttackPlayer : MonoBehaviour
 
         if(canAttack == true)
         {
-            player.TakeDamage(40);
+            player.TakeDamage(attackDamage);
             canAttack = false;
         }
     }

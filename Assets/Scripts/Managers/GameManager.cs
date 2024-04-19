@@ -53,7 +53,7 @@ public class GameManager : MonoBehaviour
 
     public void Win()
     {
-        MenuPause.instance.ShowWinCanvas();
+        MenuPause.instance.ShowStatsCanvas();
         _gameOver = true;
     }
 

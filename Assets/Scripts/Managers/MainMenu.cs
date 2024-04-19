@@ -11,17 +11,28 @@ public class MainMenu : MonoBehaviour
     [SerializeField] float _initialPosition;
     [SerializeField] float _finalPosition; 
     [SerializeField] float _bookSpeed = 5f;
-    
-    
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
     public void PlayGame()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
+
+    public void NewGame()
+    {
+        PlayerPrefs.SetInt("level", 3);
+        PlayerPrefs.SetInt("maxScore", 0);
+        PlayerPrefs.SetInt("maxHealth", 50);
+        PlayerPrefs.SetFloat("movementSpeed", 7);
+        PlayerPrefs.SetInt("damage", 5);
+        PlayerPrefs.SetFloat("fireRate", 3);
+        PlayerPrefs.SetFloat("fireRateTimer", 0);
+
+        SceneManager.LoadScene(3);
+    }
+
+    public void ContinueGame()
+    {
+        SceneManager.LoadScene(Global.level);
     }
 
     // Update is called once per frame
@@ -60,7 +71,7 @@ public class MainMenu : MonoBehaviour
         
         while (_bookOptTransform.position.y > _finalPosition)
         {
-            _bookOptTransform.localPosition -= new Vector3(0, 1 * _bookSpeed, 0);
+            _bookOptTransform.localPosition -= new Vector3(0, 1 * _bookSpeed * Time.deltaTime, 0);
             yield return new WaitForEndOfFrame();
         }
 
@@ -70,7 +81,7 @@ public class MainMenu : MonoBehaviour
     {
         while (_bookOptTransform.position.y < _initialPosition)
         {
-            _bookOptTransform.localPosition += new Vector3(0, 1 * _bookSpeed, 0);
+            _bookOptTransform.localPosition += new Vector3(0, 1 * _bookSpeed * Time.deltaTime, 0);
             yield return new WaitForEndOfFrame();
         }
     }
@@ -90,7 +101,7 @@ public class MainMenu : MonoBehaviour
         
         while (_bookPlayTransform.position.y > _finalPosition)
         {
-            _bookPlayTransform.localPosition -= new Vector3(0, 1 * _bookSpeed, 0);
+            _bookPlayTransform.localPosition -= new Vector3(0, 1 * _bookSpeed * Time.deltaTime, 0);
             yield return new WaitForEndOfFrame();
         }
 
@@ -100,7 +111,7 @@ public class MainMenu : MonoBehaviour
     {
         while (_bookPlayTransform.position.y < _initialPosition)
         {
-            _bookPlayTransform.localPosition += new Vector3(0, 1 * _bookSpeed, 0);
+            _bookPlayTransform.localPosition += new Vector3(0, 1 * _bookSpeed * Time.deltaTime, 0);
             yield return new WaitForEndOfFrame();
         }
     }

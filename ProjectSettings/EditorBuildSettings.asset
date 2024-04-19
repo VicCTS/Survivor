@@ -14,4 +14,19 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/MainMenu.unity
     guid: 6266823ba2e61f446b2e520d9e9b34de
+  - enabled: 1
+    path: Assets/Scenes/Level1_ToniAguilar.unity
+    guid: 7e8e565feb40e9e489385f31a808e50f
+  - enabled: 1
+    path: Assets/Scenes/Level6_Axel 1.unity
+    guid: c4d74ca4dcc527643bd71de6f1870e35
+  - enabled: 1
+    path: Assets/Scenes/Level7_MireiaDengra 1.unity
+    guid: 1a421c127977a1148bc774d654bad4f9
+  - enabled: 1
+    path: Assets/Scenes/Level8_Oriol 1.unity
+    guid: 59ad70bba9e24184596a252471bec0e1
+  - enabled: 1
+    path: Assets/Scenes/Level9_Lei 1.unity
+    guid: e853ed260a5698449ba112da6eb8a3d0
   m_configObjects: {}

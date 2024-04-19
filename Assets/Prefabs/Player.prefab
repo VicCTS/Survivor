@@ -1486,6 +1486,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerSpeed: 5
+  rotationSpeed: 10
   turnSmoothTime: 0.1
   _sensorPosition: {fileID: 4575955316974186597}
   _sensorRadius: 0.2
@@ -1499,6 +1500,8 @@ MonoBehaviour:
   _canShoot: 0
   _rateOfFire: 1
   _rateOfFireTimer: 0
+  joystickLeft: {fileID: 0}
+  joystickRight: {fileID: 0}
 --- !u!1 &5996166102262907553
 GameObject:
   m_ObjectHideFlags: 0
