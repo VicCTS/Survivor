@@ -8,21 +8,24 @@ public class IAEnemyAttackPlayer : MonoBehaviour
     enum State
     {
         Chasing,
-        Attacking
+        Attacking,
+        Dead
     }
 
     [SerializeField]State currentState;
 
     NavMeshAgent enemyAgent;
     Transform playerTransform;
+    Animator _animator;
+    ParticlesActivator _particles;
 
     [SerializeField]private int _health =5;
 
     [SerializeField] float attackRange = 5;
     [SerializeField] float attackAngle = 90;
     [SerializeField] int attackDamage = 1;
-    float attackTime;
-    float attackWait = 1;
+    [SerializeField] float attackTime;
+    [SerializeField] float attackWait = 2;
     bool canAttack = true;
 
     IsometricController player;
@@ -30,13 +33,18 @@ public class IAEnemyAttackPlayer : MonoBehaviour
     void Awake()
     {
         enemyAgent = GetComponent<NavMeshAgent>();
+        _animator = GetComponent<Animator>();
+        _particles = GetComponent<ParticlesActivator>();
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
         player = playerTransform.GetComponent<IsometricController>();
+        
     }
 
     void Start()
     {
         currentState = State.Chasing;
+
+        _animator.SetBool("isWalking", true);
     }
 
     void Update()
@@ -62,7 +70,11 @@ public class IAEnemyAttackPlayer : MonoBehaviour
 
         if(OnRange() == true)
         {
+            enemyAgent.isStopped = true;
+
             currentState = State.Attacking;
+
+            _animator.SetBool("isWalking", false);
         }
     }
 
@@ -71,11 +83,16 @@ public class IAEnemyAttackPlayer : MonoBehaviour
         if(OnRange() == false)
         {
             currentState = State.Chasing;
+
+            _animator.SetBool("isWalking", true);
+
+            enemyAgent.isStopped = false;
         }
 
         if(canAttack == false)
         {
             attackTime += Time.deltaTime;
+
             if(attackTime >= attackWait)
             {
                 canAttack = true;
@@ -85,6 +102,7 @@ public class IAEnemyAttackPlayer : MonoBehaviour
 
         if(canAttack == true)
         {
+            _animator.SetTrigger("isAttacking");
             player.TakeDamage(attackDamage);
             canAttack = false;
         }
@@ -101,16 +119,18 @@ public class IAEnemyAttackPlayer : MonoBehaviour
         {
             return true;
         }
-            return false;
+
+        return false;
     }
 
     private void Death()
     {
-        //anim.SetBool("is dead", true);
+        _animator.SetTrigger("Die");
 
         GameManager.instance.EnemyDestroyed();
 
-        Destroy(this.gameObject);
+        Destroy(this.gameObject, 2);
+
         /*int randomObject = Random.Range(0, 20);
         Debug.Log(randomObject);
 
@@ -122,13 +142,17 @@ public class IAEnemyAttackPlayer : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
+        _particles.ActivateParticles();
+
         _health -= damage;
 
         if(_health <= 0)
         {
+            currentState = State.Dead;
+
+            enemyAgent.isStopped = true;
                 
             Death();
-
         }
     }
 

@@ -31,8 +31,9 @@ public class SoundManager : MonoBehaviour
         sfxSource.PlayOneShot(clip);
     }
 
-    public void PlayBGM()
+    public void PlayBGM(AudioClip clip)
     {
+        bgmSource.clip = clip;
         bgmSource.Play();
     }
 

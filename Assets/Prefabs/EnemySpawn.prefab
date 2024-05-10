@@ -259,8 +259,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyPrefab:
-  - {fileID: 499351006774304840, guid: ba1729ebfcee1f744b551d942795c3ec, type: 3}
-  - {fileID: 7889510501162095688, guid: f53c55e7b307af847a50045f797c7c54, type: 3}
+  - {fileID: 1234477055738417067, guid: 2a9f41be2052430438188d79ae83a7f2, type: 3}
+  - {fileID: 5606615723813728313, guid: 792a7e144eea22843bcb4ffce3424416, type: 3}
+  totalLevelEnemies: 0
   enemyToSpawn: 0
   waveTime: 60
   waveNumber: 5

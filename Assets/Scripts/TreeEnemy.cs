@@ -8,12 +8,17 @@ public class TreeEnemy : MonoBehaviour
     enum State
     {
         Rushing,
-        Attacking
+        Attacking,
+        Dead
     }
 
     State _currentState;
 
     NavMeshAgent _treeEnemyAgent;
+
+    Animator _animator;
+
+    ParticlesActivator _particles;
 
     [SerializeField]private int _health = 5;
 
@@ -31,12 +36,17 @@ public class TreeEnemy : MonoBehaviour
     void Awake()
     {
         _treeEnemyAgent = GetComponent<NavMeshAgent>();
+        _animator = GetComponent<Animator>();
+        _particles = GetComponent<ParticlesActivator>();
     }
 
     void Start()
     {
         SetTrees();
+
         _currentState = State.Rushing;
+
+        _animator.SetBool("isWalking", true);
     }
 
     void Update()
@@ -88,6 +98,8 @@ public class TreeEnemy : MonoBehaviour
         {
             _treeEnemyAgent.isStopped = true;
             _currentState = State.Attacking;
+
+            _animator.SetBool("isWalking", false);
         }
     }
 
@@ -98,6 +110,9 @@ public class TreeEnemy : MonoBehaviour
         if (timer > waitTime)
         {
             timer = 0;
+
+            _animator.SetTrigger("isAttacking");
+
             _treeTarget.TakeDamage(_enemyDamage);
         }
 
@@ -107,6 +122,8 @@ public class TreeEnemy : MonoBehaviour
             GetNearestTree();
             _treeEnemyAgent.isStopped = false;
             _currentState = State.Rushing;
+
+            _animator.SetBool("isWalking", true);
         }
     }
 
@@ -132,7 +149,9 @@ public class TreeEnemy : MonoBehaviour
         
         GameManager.instance.EnemyDestroyed();
 
-        Destroy(this.gameObject);
+        _animator.SetTrigger("Die");
+
+        Destroy(this.gameObject, 2);
         /*int randomObject = Random.Range(0, 20);
         Debug.Log(randomObject);
 
@@ -144,13 +163,17 @@ public class TreeEnemy : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
+        _particles.ActivateParticles();
+
         _health -= damage;
 
         if(_health <= 0)
         {
-                
-            Death();
+            _currentState = State.Dead;
 
+            _treeEnemyAgent.isStopped = true;
+
+            Death();
         }
     }
 }

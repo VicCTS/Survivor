@@ -111,7 +111,7 @@ MonoBehaviour:
   _treeTarget: {fileID: 0}
   distances: []
   _attackRange: 10
-  waitTime: 2
+  waitTime: 2.5
   timer: 0
 --- !u!195 &1657661205417774990
 NavMeshAgent:

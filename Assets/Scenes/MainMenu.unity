@@ -1105,6 +1105,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1023213762b22454c98cb14521f0d063, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bgmSource: {fileID: 0}
+  sfxSource: {fileID: 0}
+  buttonSound: {fileID: 0}
+  playSound: {fileID: 0}
+  bgmSound: {fileID: 0}
 --- !u!1 &470228539
 GameObject:
   m_ObjectHideFlags: 0
