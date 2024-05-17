@@ -33,7 +33,7 @@ public class StatsSaver : MonoBehaviour
         Global.playerMaxHealth = PlayerPrefs.GetInt("maxHealth", 50);
         Global.playerSpeed = PlayerPrefs.GetFloat("movementSpeed", 13);
         Global.playerDamage = PlayerPrefs.GetInt("damage", 5);
-        Global.fireRate = PlayerPrefs.GetFloat("fireRate", 1.5f);
+        Global.fireRate = PlayerPrefs.GetFloat("fireRate", 1.2f);
         Global.fireRateTimer = PlayerPrefs.GetFloat("fireRateTimer", 0);
     }
 

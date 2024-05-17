@@ -9,6 +9,6 @@ public static class Global
     public static int playerMaxHealth = 50;
     public static float playerSpeed = 13;
     public static int playerDamage = 5;
-    public static float fireRate = 1.5f;
+    public static float fireRate = 1.2f;
     public static float fireRateTimer = 0;
 }

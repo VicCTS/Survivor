@@ -10,7 +10,16 @@ public class SoundManager : MonoBehaviour
     [SerializeField]AudioSource sfxSource;
     public AudioClip buttonSound;
     public AudioClip playSound;
-    public AudioClip bgmSound;
+    public AudioClip bgmMenuSound;
+    public AudioClip bgmGameSound;
+    public AudioClip sonidoDisparo;
+    public AudioClip AtaqueEnemgio;
+    public AudioClip golpeArbol;
+    public AudioClip muertePersonaje;
+    public AudioClip muerteEnemigo;
+    public AudioClip muerteArbol;
+    public AudioClip winBGM;
+    public AudioClip GameOverBGM;
 
     
     // Start is called before the first frame update
@@ -24,6 +33,8 @@ public class SoundManager : MonoBehaviour
         {
             instance =this;
         }
+
+        DontDestroyOnLoad(gameObject);
     }
 
     public void PlaySound(AudioClip clip)

@@ -90,11 +90,13 @@ public class MenuPause : MonoBehaviour
     public void RestartLevel()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        SoundManager.instance.PlayBGM(SoundManager.instance.bgmGameSound);
     }
 
     public void NextLevel()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        SoundManager.instance.PlayBGM(SoundManager.instance.bgmGameSound);
     }
 
     public void UpgradeMaxHealth()

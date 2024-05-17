@@ -2,14 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 public class IAEnemyAttackPlayer : MonoBehaviour
 {
     enum State
     {
         Chasing,
-        Attacking,
-        Dead
+        Dead,
+        Attacking
     }
 
     [SerializeField]State currentState;
@@ -24,11 +25,14 @@ public class IAEnemyAttackPlayer : MonoBehaviour
     [SerializeField] float attackRange = 5;
     [SerializeField] float attackAngle = 90;
     [SerializeField] int attackDamage = 1;
-    [SerializeField] float attackTime;
-    [SerializeField] float attackWait = 2;
+    float attackTime;
+    float attackWait = 1;
     bool canAttack = true;
 
     IsometricController player;
+
+    public Slider hpSlipder;
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -37,12 +41,14 @@ public class IAEnemyAttackPlayer : MonoBehaviour
         _particles = GetComponent<ParticlesActivator>();
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
         player = playerTransform.GetComponent<IsometricController>();
-        
     }
 
     void Start()
     {
         currentState = State.Chasing;
+
+        hpSlipder.maxValue = _health;
+        hpSlipder.value = hpSlipder.maxValue;
 
         _animator.SetBool("isWalking", true);
     }
@@ -103,6 +109,7 @@ public class IAEnemyAttackPlayer : MonoBehaviour
         if(canAttack == true)
         {
             _animator.SetTrigger("isAttacking");
+            SoundManager.instance.PlaySound(SoundManager.instance.AtaqueEnemgio);
             player.TakeDamage(attackDamage);
             canAttack = false;
         }
@@ -119,7 +126,7 @@ public class IAEnemyAttackPlayer : MonoBehaviour
         {
             return true;
         }
-
+        
         return false;
     }
 
@@ -127,10 +134,10 @@ public class IAEnemyAttackPlayer : MonoBehaviour
     {
         _animator.SetTrigger("Die");
 
+        SoundManager.instance.PlaySound(SoundManager.instance.muerteEnemigo);
         GameManager.instance.EnemyDestroyed();
 
         Destroy(this.gameObject, 2);
-
         /*int randomObject = Random.Range(0, 20);
         Debug.Log(randomObject);
 
@@ -146,6 +153,8 @@ public class IAEnemyAttackPlayer : MonoBehaviour
 
         _health -= damage;
 
+        hpSlipder.value = _health;
+
         if(_health <= 0)
         {
             currentState = State.Dead;
@@ -153,6 +162,7 @@ public class IAEnemyAttackPlayer : MonoBehaviour
             enemyAgent.isStopped = true;
                 
             Death();
+
         }
     }
 

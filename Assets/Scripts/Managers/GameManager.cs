@@ -47,12 +47,14 @@ public class GameManager : MonoBehaviour
 
     public void GameOver()
     {
+        SoundManager.instance.PlayBGM(SoundManager.instance.GameOverBGM);
         MenuPause.instance.ShowGameOverCanvas();
         _gameOver = true;
     }
 
     public void Win()
     {
+        SoundManager.instance.PlayBGM(SoundManager.instance.winBGM);
         MenuPause.instance.ShowStatsCanvas();
         _gameOver = true;
     }

@@ -2,14 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 public class TreeEnemy : MonoBehaviour
 {
     enum State
     {
         Rushing,
-        Attacking,
-        Dead
+        Dead,
+        Attacking
     }
 
     State _currentState;
@@ -33,6 +34,8 @@ public class TreeEnemy : MonoBehaviour
     [SerializeField] private float waitTime = 2.0f;
     [SerializeField] private float timer = 0.0f;
 
+    public Slider hpSlipder;
+
     void Awake()
     {
         _treeEnemyAgent = GetComponent<NavMeshAgent>();
@@ -43,8 +46,10 @@ public class TreeEnemy : MonoBehaviour
     void Start()
     {
         SetTrees();
-
         _currentState = State.Rushing;
+
+        hpSlipder.maxValue = _health;
+        hpSlipder.value = hpSlipder.maxValue;
 
         _animator.SetBool("isWalking", true);
     }
@@ -114,6 +119,7 @@ public class TreeEnemy : MonoBehaviour
             _animator.SetTrigger("isAttacking");
 
             _treeTarget.TakeDamage(_enemyDamage);
+            SoundManager.instance.PlaySound(SoundManager.instance.golpeArbol);
         }
 
         if (_treeTarget == null)
@@ -145,13 +151,13 @@ public class TreeEnemy : MonoBehaviour
 
     private void Death()
     {
-        //anim.SetBool("is dead", true);
+        _animator.SetTrigger("Die");
         
+        
+        SoundManager.instance.PlaySound(SoundManager.instance.muerteEnemigo);
         GameManager.instance.EnemyDestroyed();
 
-        _animator.SetTrigger("Die");
-
-        Destroy(this.gameObject, 2);
+        Destroy(this.gameObject, 2f);
         /*int randomObject = Random.Range(0, 20);
         Debug.Log(randomObject);
 
@@ -163,17 +169,20 @@ public class TreeEnemy : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        _particles.ActivateParticles();
-
         _health -= damage;
+
+        hpSlipder.value = _health;
+
+        _particles.ActivateParticles();
 
         if(_health <= 0)
         {
             _currentState = State.Dead;
 
             _treeEnemyAgent.isStopped = true;
-
+                
             Death();
+
         }
     }
 }

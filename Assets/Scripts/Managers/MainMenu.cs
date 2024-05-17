@@ -12,11 +12,6 @@ public class MainMenu : MonoBehaviour
     [SerializeField] float _finalPosition; 
     [SerializeField] float _bookSpeed = 5f;
 
-    void Awake()
-    {
-        Time.timeScale = 1;
-    }
-
     public void PlayGame()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
@@ -32,12 +27,15 @@ public class MainMenu : MonoBehaviour
         PlayerPrefs.SetFloat("fireRate", 3);
         PlayerPrefs.SetFloat("fireRateTimer", 0);
 
+        SoundManager.instance.PlayBGM(SoundManager.instance.bgmGameSound);
+
         SceneManager.LoadScene(3);
     }
 
     public void ContinueGame()
     {
         SceneManager.LoadScene(Global.level);
+        SoundManager.instance.PlayBGM(SoundManager.instance.bgmGameSound);
     }
 
     // Update is called once per frame

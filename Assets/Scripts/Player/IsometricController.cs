@@ -49,7 +49,7 @@ public class IsometricController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _slider = GameObject.Find("UI HP").GetComponentInChildren<Slider>();
+        _slider = GameObject.Find("Player HP").GetComponentInChildren<Slider>();
         _controller = GetComponent<CharacterController>();
         _anim = GetComponentInChildren<Animator>();
         _maxHP = Global.playerMaxHealth;
@@ -96,6 +96,7 @@ public class IsometricController : MonoBehaviour
     
     void Shooting()
     {
+        SoundManager.instance.PlaySound(SoundManager.instance.sonidoDisparo);
         Instantiate(bulletPrefab, bulletSpawn.position, bulletSpawn.rotation);
     }
 
@@ -122,7 +123,9 @@ public class IsometricController : MonoBehaviour
         if(_hp <= 0 &&  GameManager.instance._gameOver == false)
         {
             GameManager.instance.GameOver();
+            SoundManager.instance.PlaySound(SoundManager.instance.muertePersonaje);
             _anim.SetTrigger("IsDead");
+            SoundManager.instance.PlayBGM(SoundManager.instance.GameOverBGM);
 
         }
     }

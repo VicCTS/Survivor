@@ -35,6 +35,7 @@ public class TreeHealth : MonoBehaviour
 
             if(treeHealth <= 0)
             {
+                SoundManager.instance.PlaySound(SoundManager.instance.muerteArbol);
                 GameManager.instance.TreeDestroyed();
                 Destroy(gameObject);
             }
