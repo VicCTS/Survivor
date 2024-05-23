@@ -187,8 +187,8 @@ MonoBehaviour:
   _gameOver: 0
   trees: []
   totalTrees: 0
-  totalEnemies: 20
-  totalWaves: 2
+  totalEnemies: 60
+  totalWaves: 3
 --- !u!1 &4654052625535179032
 GameObject:
   m_ObjectHideFlags: 0

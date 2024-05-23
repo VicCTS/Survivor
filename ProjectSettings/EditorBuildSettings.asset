@@ -18,6 +18,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Level1_ToniAguilar.unity
     guid: 7e8e565feb40e9e489385f31a808e50f
   - enabled: 1
+    path: Assets/Scenes/Level3_GerardCaja.unity
+    guid: 61dd6e9288363b045a1dc14802f37b82
+  - enabled: 1
     path: Assets/Scenes/Level6_Axel 1.unity
     guid: c4d74ca4dcc527643bd71de6f1870e35
   - enabled: 1
@@ -29,4 +32,28 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Level9_Lei 1.unity
     guid: e853ed260a5698449ba112da6eb8a3d0
+  - enabled: 1
+    path: Assets/Scenes/Level10_Claudia 1.unity
+    guid: 2068f6da11bf72947a43a00e8146e0e1
+  - enabled: 1
+    path: Assets/Scenes/Level11_AsielPino.unity
+    guid: 7d68759eb1181be409747de6252199a8
+  - enabled: 1
+    path: Assets/Scenes/Level12_Alba.unity
+    guid: ab798b82ebf2293408813033a23f03f5
+  - enabled: 1
+    path: Assets/Scenes/Level13_Joan.unity
+    guid: 6b3e74f1508a2fc4eb98a81cf2aee4bd
+  - enabled: 1
+    path: Assets/Scenes/Level14_Alba.unity
+    guid: 2052f8644d8c32e40a574324d886399f
+  - enabled: 1
+    path: Assets/Scenes/Level15_DaniSanz.unity
+    guid: cc70cae798b14c9469678e190660e29f
+  - enabled: 1
+    path: Assets/Scenes/Level16_GabrielTallon.unity
+    guid: da6a5e68986e2434e8cdcb78393c0a9c
+  - enabled: 1
+    path: Assets/Scenes/Level17_SalmaUrbano.unity
+    guid: 256bcbe86a580ea4f81bba57f2c6e5d3
   m_configObjects: {}

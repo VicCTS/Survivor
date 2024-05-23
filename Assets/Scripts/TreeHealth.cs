@@ -7,6 +7,12 @@ public class TreeHealth : MonoBehaviour
 {
     [SerializeField]private float treeHealth = 10;
     [SerializeField]private Slider healthSlider;
+    private ParticlesActivator particles;
+
+    void Awake()
+    {
+        particles = GetComponent<ParticlesActivator>();
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -17,19 +23,19 @@ public class TreeHealth : MonoBehaviour
 
     // Update is called once per frame
 
-    void Update()
+    /*void Update()
     {
         if(Input.GetButtonDown("Jump")) 
         {
           TakeDamage(5);
         }  
-    }
+    }*/
 
     public void TakeDamage(int damage)
     {
         if(treeHealth > 0) 
         {
-            Debug.Log("arbol a recibido " + damage + " de daño");
+            //Debug.Log("arbol a recibido " + damage + " de daño");
             treeHealth -= damage; 
             healthSlider.value = treeHealth;
 
@@ -37,7 +43,8 @@ public class TreeHealth : MonoBehaviour
             {
                 SoundManager.instance.PlaySound(SoundManager.instance.muerteArbol);
                 GameManager.instance.TreeDestroyed();
-                Destroy(gameObject);
+                particles.ActivateParticles();
+                Destroy(this);
             }
         } 
     }
