@@ -25,6 +25,8 @@ public class TreeEnemy : MonoBehaviour
 
     public int _enemyDamage = 2; 
     [SerializeField]GameObject[] _treePosition;
+    [SerializeField]List<GameObject> _treeList;
+    [SerializeField]TreeHealth[] _treeScripts;
     int _nearestTreeIndex;
     [SerializeField]TreeHealth _treeTarget; 
     [SerializeField] float[] distances;
@@ -69,24 +71,76 @@ public class TreeEnemy : MonoBehaviour
 
     void SetTrees()
     {
+        _treeList.Clear();
+
         _treePosition = GameObject.FindGameObjectsWithTag("Arbol");
-        distances = new float[_treePosition.Length];
+
+        _treeScripts = new TreeHealth[_treePosition.Length];
 
         for (int i = 0; i < _treePosition.Length; i++)
         {
-            distances[i] = Vector3.Distance(transform.position, _treePosition[i].transform.position);
+            _treeScripts[i] = _treePosition[i].GetComponent<TreeHealth>();
+        }
+
+        for (int i = 0; i < _treePosition.Length; i++)
+        {
+            if(_treeScripts[i] != null)
+            {
+                _treeList.Add(_treePosition[i]);
+            }
+        }
+
+        distances = new float[_treeList.Count];
+        
+
+        for (int i = 0; i < _treeList.Count; i++)
+        {
+            if(_treePosition[i] != null)
+            {
+                distances[i] = Vector3.Distance(transform.position, _treeList[i].transform.position);
+            }
+            
+        } 
+
+        _nearestTreeIndex = GetNearestTree();
+        _treeTarget = _treeList[_nearestTreeIndex].GetComponent<TreeHealth>();
+
+        /*for (int i = 0; i < _treePosition.Length; i++)
+        {
+            if( _treeScripts[i] == null)
+            {
+                _treePosition[i] = null;
+            }
+        }*/
+
+        /*distances = new float[_treePosition.Length];
+
+        for (int i = 0; i < _treePosition.Length; i++)
+        {
+            if(_treePosition[i] != null)
+            {
+                distances[i] = Vector3.Distance(transform.position, _treePosition[i].transform.position);
+            }
+            
         } 
         _nearestTreeIndex = GetNearestTree();
-        _treeTarget = _treePosition[_nearestTreeIndex].GetComponent<TreeHealth>();
+        _treeTarget = _treePosition[_nearestTreeIndex].GetComponent<TreeHealth>();*/
     }
 
     bool OnRange()
     {
-        if(Vector3.Distance(transform.position, _treePosition[_nearestTreeIndex].transform.position) <= _attackRange) 
+        /*if(Vector3.Distance(transform.position, _treePosition[_nearestTreeIndex].transform.position) <= _attackRange) 
+        {
+            return true;
+        }
+        return false;*/
+
+        if(Vector3.Distance(transform.position, _treeList[_nearestTreeIndex].transform.position) <= _attackRange) 
         {
             return true;
         }
         return false;
+
     }
 
     void Rush()
@@ -97,7 +151,9 @@ public class TreeEnemy : MonoBehaviour
             GetNearestTree();
         }
 
-        _treeEnemyAgent.destination = _treePosition[_nearestTreeIndex].transform.position;
+        //_treeEnemyAgent.destination = _treePosition[_nearestTreeIndex].transform.position;
+
+        _treeEnemyAgent.destination = _treeList[_nearestTreeIndex].transform.position;
 
         if(OnRange() == true)
         {
