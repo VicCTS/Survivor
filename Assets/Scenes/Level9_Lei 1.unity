@@ -335,7 +335,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20cba1e30641ddd489ffe10339d879db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  treeHealth: 10
+  treeHealth: 20
   healthSlider: {fileID: 901849423}
 --- !u!114 &38585432
 MonoBehaviour:
@@ -1939,7 +1939,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20cba1e30641ddd489ffe10339d879db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  treeHealth: 10
+  treeHealth: 20
   healthSlider: {fileID: 1781860417}
 --- !u!114 &408987294
 MonoBehaviour:
@@ -6544,6 +6544,14 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1379389841381059595, guid: 911ac3251f5f0234d943a01365be4a1e, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 33
+      objectReference: {fileID: 0}
+    - target: {fileID: 1379389841381059595, guid: 911ac3251f5f0234d943a01365be4a1e, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4654052625535179032, guid: 911ac3251f5f0234d943a01365be4a1e, type: 3}
       propertyPath: m_Name
       value: Necesario nivel
@@ -9498,7 +9506,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20cba1e30641ddd489ffe10339d879db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  treeHealth: 10
+  treeHealth: 20
   healthSlider: {fileID: 1592619078}
 --- !u!114 &1620630010
 MonoBehaviour:
@@ -11428,7 +11436,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20cba1e30641ddd489ffe10339d879db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  treeHealth: 10
+  treeHealth: 20
   healthSlider: {fileID: 1415660635}
 --- !u!114 &2012371611
 MonoBehaviour:

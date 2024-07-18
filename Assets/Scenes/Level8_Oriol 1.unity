@@ -11118,7 +11118,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20cba1e30641ddd489ffe10339d879db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  treeHealth: 10
+  treeHealth: 20
   healthSlider: {fileID: 932890888}
 --- !u!114 &517665908
 MonoBehaviour:
@@ -13402,7 +13402,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20cba1e30641ddd489ffe10339d879db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  treeHealth: 10
+  treeHealth: 20
   healthSlider: {fileID: 1295274276}
 --- !u!114 &640237519
 MonoBehaviour:
@@ -16674,7 +16674,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 63
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -26712,7 +26712,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20cba1e30641ddd489ffe10339d879db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  treeHealth: 10
+  treeHealth: 20
   healthSlider: {fileID: 1588982910}
 --- !u!114 &1175128312
 MonoBehaviour:
@@ -32290,7 +32290,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20cba1e30641ddd489ffe10339d879db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  treeHealth: 10
+  treeHealth: 20
   healthSlider: {fileID: 2024477842}
 --- !u!114 &1445971214
 MonoBehaviour:
@@ -40356,6 +40356,14 @@ PrefabInstance:
     - target: {fileID: 749955077507301889, guid: 911ac3251f5f0234d943a01365be4a1e, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1379389841381059595, guid: 911ac3251f5f0234d943a01365be4a1e, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1379389841381059595, guid: 911ac3251f5f0234d943a01365be4a1e, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4654052625535179032, guid: 911ac3251f5f0234d943a01365be4a1e, type: 3}
       propertyPath: m_Name

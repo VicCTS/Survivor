@@ -9848,6 +9848,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Necesario nivel
       objectReference: {fileID: 0}
+    - target: {fileID: 5029705510295492099, guid: 911ac3251f5f0234d943a01365be4a1e, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5029705510295492099, guid: 911ac3251f5f0234d943a01365be4a1e, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7129635126303901337, guid: 911ac3251f5f0234d943a01365be4a1e, type: 3}
       propertyPath: m_LocalPosition.y
       value: 2.82

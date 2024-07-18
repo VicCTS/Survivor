@@ -13,10 +13,7 @@ EditorBuildSettings:
     guid: 16270d20f76182c4f82216fbc5e1b749
   - enabled: 1
     path: Assets/Scenes/MainMenu.unity
-    guid: 6266823ba2e61f446b2e520d9e9b34de
-  - enabled: 1
-    path: Assets/Scenes/Level1_ToniAguilar.unity
-    guid: 7e8e565feb40e9e489385f31a808e50f
+    guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
     path: Assets/Scenes/Level3_GerardCaja.unity
     guid: 61dd6e9288363b045a1dc14802f37b82
